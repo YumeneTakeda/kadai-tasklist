@@ -48,13 +48,12 @@ class TasksController < ApplicationController
         flash[:success] = "Task が正常に削除されました"
         redirect_to tasks_url
     end
-end
-
-private
-#これより下のメソッドはアクションでなく、このクラス内でのみ使用することを明示している
-def task_params
-#これがStrong Parameterであり、必要なデータ以外をフィルタにかけて捨てるという意味。
-	params.require(:task).permit(:content)
-#params.require(:message)でMessageモデルのフォームからのデータに関するものだと明示している。
-#permit(:content)で必要なカラムだけを選択している。
+    
+    private
+    #これより下のメソッドはアクションでなく、このクラス内でのみ使用することを明示している
+    def task_params
+        #これがStrong Parameterであり、必要なデータ以外をフィルタにかけて捨てるという意味。
+        params.require(:task).permit(:content)
+        #permit(:content)で必要なカラムだけを選択している。
+    end
 end

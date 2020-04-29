@@ -3,8 +3,5 @@
 
 <%= link_to "一覧に戻る", tasks_path %>     
 <!--一覧へ戻る-->
-<%= link_to "このメッセージを編集する", edit_task_path(@task) %>     
-<!--edit_messageへのパス。ついでにmessageも渡す-->
-<%= link_to "このメッセージを削除する", @message,method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %>
-<!--method: :deleteはDELETEメソッドを送信すると明示している。
-data: {confirm: ... }はJavaScriptを使っていて、アラートを表示させてる-->
+<%= link_to "このタスクを編集する", edit_task_path(@task) %>
+<%= link_to "このタスクを削除する", @task,method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %>
