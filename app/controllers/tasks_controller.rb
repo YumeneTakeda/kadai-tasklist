@@ -51,9 +51,10 @@ class TasksController < ApplicationController
     
     private
     #これより下のメソッドはアクションでなく、このクラス内でのみ使用することを明示している
+    
     def task_params
         #これがStrong Parameterであり、必要なデータ以外をフィルタにかけて捨てるという意味。
-        params.require(:task).permit(:content)
+        params.require(:task).permit(:content,:status)
         #permit(:content)で必要なカラムだけを選択している。
     end
 end
