@@ -1,6 +1,0 @@
-<% if logged_in? %>
-    <p>ログイン完了ユーザ:<%= link_to <%= current_user.name %>, @user %></p>
-<% else %>
-    <h1>Welcome to the Tasklists</h1>
-    <%= link_to "Sign up now !", signup_path %>
-<% end %>
