@@ -1,9 +1,16 @@
 class TasksController < ApplicationController
+    before_action :require_user_logged_in
+    before_action :correct_user, only: [:destroy]
+    
     def index
-        @tasks = Task.all
+        #@task = Task.all
+        @task = current_user.task
+        #counts(@user)
     end
     
     def show
+        #@user = User.find(params[:id])
+        #@task = @user.tasks.order(id: :desc).page(params[:page])
         @task = Task.find(params[:id])
     end
     
@@ -12,7 +19,7 @@ class TasksController < ApplicationController
     end
     
     def create
-        @task = Task.new(task_params)
+        @task = current_user.task.new(task_params)
         
         if @task.save
         	flash[:success] = "Task が正常に投稿されました"
@@ -30,6 +37,8 @@ class TasksController < ApplicationController
     
     def update
         @task = Task.find(params[:id])
+        current_user.task
+        
         
         if @task.update(task_params)
         	flash[:success] = "Task が正常に更新されました"
@@ -54,7 +63,15 @@ class TasksController < ApplicationController
     
     def task_params
         #これがStrong Parameterであり、必要なデータ以外をフィルタにかけて捨てるという意味。
-        params.require(:task).permit(:content,:status)
+        params.require(:task).permit(:content,:status,:user)
         #permit(:content)で必要なカラムだけを選択している。
     end
+    
+    def correct_user
+        @task = current_user.task.find_by(id: params[:id])
+        unless @task
+            redirect_to root_url
+        end
+    end
+        
 end
