@@ -1,9 +1,11 @@
 class TasksController < ApplicationController
-    before_action :require_user_logged_in
+    before_action :require_user_logged_in, except:[:index]
     before_action :correct_user, only: [:show, :destroy]
     
     def index
-        @task = current_user.tasks
+        if logged_in?
+            @task = current_user.tasks
+        end
     end
     
     def show
@@ -51,7 +53,7 @@ class TasksController < ApplicationController
         @task.destroy
         
         flash[:success] = "Task が正常に削除されました"
-        redirect_to tasks_url
+        redirect_to root_url
     end
     
     private
