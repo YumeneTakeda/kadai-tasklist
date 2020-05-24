@@ -3,14 +3,10 @@ class TasksController < ApplicationController
     before_action :correct_user, only: [:show, :destroy]
     
     def index
-        #@task = Task.all
         @task = current_user.task
-        #counts(@user)
     end
     
     def show
-        #@user = User.find(params[:id])
-        #@task = @user.tasks.order(id: :desc).page(params[:page])
         @task = Task.find(params[:id])
     end
     
