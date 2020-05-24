@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     
     def index
         if logged_in?
-            @task = current_user.tasks
+            @task = current_user.tasks.page(params[:page])
         end
     end
     
