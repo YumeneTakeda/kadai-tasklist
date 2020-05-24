@@ -1,7 +1,5 @@
 <h1><li class="nav-item"><a href="/">Home</a></li></h1>
 <% if logged_in? %>
-    <%= link_to "users", users_path %>
-    <%= link_to "My profile", user_path(current_user) %>
     <%= link_to "Logout", logout_path, method: :delete %>
 <% else %>
     <ul class="navbar-nav">
